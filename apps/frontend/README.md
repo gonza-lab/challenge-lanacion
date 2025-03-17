@@ -3,7 +3,7 @@
 ## Todo list
 - [x] Crear un componente typography que me permita renderizar contenido
 - [x] Configurar eslint
-- [ ] Desarrollar back en carpeta separada
+- [x] Desarrollar back en carpeta separada
 - [ ] Implementar redux
 - [ ] Agregar documentacion
 - [ ] Implementar unit testing

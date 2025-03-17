@@ -1,12 +1,12 @@
 import React from 'react'
-import MainLayout from './templates/MainLayout.server'
-import ArticleGrid from './organisms/ArticleGrid.server'
-import Typography from './atoms/Typography.server'
-import TagList from './molecules/TagList'
-import Button from './atoms/Button.client'
-import { ArticleProps } from './molecules/Article.server'
+import MainLayout from '../components/templates/MainLayout.server'
+import ArticleGrid from '../components/organisms/ArticleGrid.server'
+import Typography from '../components/atoms/Typography.server'
+import TagList from '../components/molecules/TagList'
+import Button from '../components/atoms/Button.client'
+import { ArticleProps } from '../components/molecules/Article.server'
 
-export default function App({ articles }: { articles: ArticleProps[] }) {
+export default function App({ data }: { data: ArticleProps[] }) {
   return (
     <main>
       <MainLayout
@@ -44,7 +44,7 @@ export default function App({ articles }: { articles: ArticleProps[] }) {
         }
       >
         <>
-          <ArticleGrid articles={articles} />
+          <ArticleGrid articles={data} />
         </>
       </MainLayout>
     </main>

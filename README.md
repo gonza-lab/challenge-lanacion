@@ -1,90 +1,101 @@
-# Org
+# Challenge La Nación
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+# Pasos para Añadir una Nueva Ruta en SSR
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+Para agregar una nueva página en la aplicación SSR, debes hacer cambios en los siguientes archivos:
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+1. **Crear el componente de la nueva página (`.server.tsx`)**  
+2. **Registrar la nueva ruta en el servidor (`server/routes.ts`)**  
+3. **Actualizar la hidratación en el cliente (`index.tsx`)**  
+4. **(Opcional) Obtener datos dinámicos en `server/ssr.ts`**  
 
-## Finish your remote caching setup
+---
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/aBG5CT9aY8)
+### 1. Crear el Componente de la Nueva Página
 
+Cada página debe tener su propio componente de servidor (`.server.tsx`).
 
-## Generate a library
+```tsx
+// src/pages/NuevaPagina.server.tsx
+export default function NuevaPagina({ data }) {
+  return (
+    <main>
+      <h1>Página Nueva</h1>
+      <p>Bienvenido a la nueva página.</p>
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+      {data && (
+        <ul>
+          {data.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      )}
+    </main>
+  );
+}
 ```
 
-## Run tasks
+`data` se usará si la página necesita cargar información desde el backend.
 
-To build the library use:
+### 2. Registrar la Nueva Ruta en el Servidor
 
-```sh
-npx nx build pkg1
+Ahora hay que decirle a Express que esta página existe.
+
+```ts
+// server/routes.ts
+import { Express } from 'express';
+import { renderSSR } from './ssr';
+import NuevaPagina from '../components/NuevaPagina.server';
+
+export function setupRoutes(app: Express) {
+  // Ruta existente
+  app.get('/', async (req, res) => {
+    await renderSSR(req, res, App, async () => {
+      const response = await fetch(process.env.BACKENDFF_URL + '/articles');
+      return response.json();
+    });
+  });
+
+  // Nueva ruta
+  app.get('/nueva', async (req, res) => {
+    await renderSSR(req, res, NuevaPagina, async () => {
+      const response = await fetch(process.env.BACKENDFF_URL + '/items');
+      return response.json();
+    });
+  });
+}
+
 ```
 
-To run any task with Nx use:
+Esto le indica al servidor que /nueva debe renderizar NuevaPagina.
+Si la ruta necesita datos, se pasa una función async para obtenerlos.
 
-```sh
-npx nx <target> <project-name>
+### 3. Actualizar la Hidratación en el Cliente
+
+El cliente debe hidratar el componente correcto según la URL.
+
+```tsx
+import React from 'react';
+import { hydrateRoot } from 'react-dom/client';
+import App from '../components/App.server';
+import About from '../components/About.server';
+import NuevaPagina from '../components/NuevaPagina.server';
+
+// Agregar la nueva ruta al mapa de rutas
+const routes: Record<string, React.FC<any>> = {
+  '/': App,
+  '/about': About,
+  '/nueva': NuevaPagina,
+};
+
+const container = document.getElementById('root');
+
+if (container) {
+  const path = window.location.pathname;
+  const Component = routes[path] || App; // Seleccionar el componente correcto
+  hydrateRoot(container, <Component data={(window as any).__INITIAL_DATA__} />);
+}
+
 ```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](hhttps://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Ahora el cliente hidratará NuevaPagina cuando la URL sea /nueva.
+La data del servidor sigue estando disponible en window.__INITIAL_DATA__.
