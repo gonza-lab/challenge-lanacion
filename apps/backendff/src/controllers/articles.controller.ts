@@ -31,6 +31,7 @@ export const getArticles = async (_req: Request, res: Response) => {
       totalPages: Math.ceil(articlesData.articles.length / limitNumber),
       articles: paginatedArticles,
     })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch articles' })
   }

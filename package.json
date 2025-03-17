@@ -6,7 +6,9 @@
     "build:frontend": "nx build frontend",
     "start:frontend": "nx serve frontend",
     "dev:frontend": "nx run frontend:dev",
-    "lint:frontend": "nx lint frontend"
+    "lint:frontend": "nx lint frontend",
+    "lint:backendff": "nx lint backendff",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
