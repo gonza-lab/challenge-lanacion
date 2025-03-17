@@ -26,7 +26,7 @@ function Typography<T extends React.ElementType = 'p'>({
   className,
   ...props
 }: TypographyProps<T>) {
-  const Component = as || 'p' 
+  const Component = as || 'p'
 
   return (
     <Component

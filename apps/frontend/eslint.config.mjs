@@ -21,6 +21,8 @@ export default defineConfig([
         window: 'readonly',
         __dirname: 'readonly',
         console: 'readonly',
+				fetch: 'readonly',
+				process: 'readonly',
       },
     },
     plugins: {

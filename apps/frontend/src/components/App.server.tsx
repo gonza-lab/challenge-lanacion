@@ -4,8 +4,9 @@ import ArticleGrid from './organisms/ArticleGrid.server'
 import Typography from './atoms/Typography.server'
 import TagList from './molecules/TagList'
 import Button from './atoms/Button.client'
+import { ArticleProps } from './molecules/Article.server'
 
-export default function App() {
+export default function App({ articles }: { articles: ArticleProps[] }) {
   return (
     <main>
       <MainLayout
@@ -43,25 +44,7 @@ export default function App() {
         }
       >
         <>
-          <ArticleGrid
-            articles={[
-              {
-                title: 'El cumpleaños de gonza',
-                image: 'foto',
-                date: '10 de Noviembre del 2001',
-              },
-              {
-                title: 'El cumpleaños de gonza',
-                image: 'foto',
-                date: '10 de Noviembre del 2001',
-              },
-              {
-                title: 'El cumpleaños de gonza',
-                image: 'foto',
-                date: '10 de Noviembre del 2001',
-              },
-            ]}
-          />
+          <ArticleGrid articles={articles} />
         </>
       </MainLayout>
     </main>
