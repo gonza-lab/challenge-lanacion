@@ -15,9 +15,8 @@ export const getArticles = async (_req: Request, res: Response) => {
     const limitNumber = parseInt(limit as string, 10)
 
     if (pageNumber < 1 || limitNumber < 1) {
-      return res
-        .status(400)
-        .json({ error: 'Page and limit must be greater than 0' })
+      res.status(400).json({ error: 'Page and limit must be greater than 0' })
+      return
     }
 
     const startIndex = (pageNumber - 1) * limitNumber
@@ -29,7 +28,9 @@ export const getArticles = async (_req: Request, res: Response) => {
       .map((article) => ({
         title: article.headlines.basic,
         image: article.promo_items?.basic.url,
-        date: format(article.display_date, "d 'de' MMMM 'de' yyyy", { locale: es }),
+        date: format(article.display_date, "d 'de' MMMM 'de' yyyy", {
+          locale: es,
+        }),
       }))
 
     res.json({

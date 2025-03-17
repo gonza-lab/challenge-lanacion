@@ -5,8 +5,16 @@ import Typography from '../components/atoms/Typography.server'
 import TagList from '../components/molecules/TagList'
 import Button from '../components/atoms/Button.client'
 import { ArticleProps } from '../components/molecules/Article.server'
+import { TagProps } from '../components/atoms/Tag.server'
 
-export default function App({ data }: { data: ArticleProps[] }) {
+interface AppProps {
+  data: {
+    articles: ArticleProps[]
+    tags: TagProps[]
+  }
+}
+
+export default function App({ data }: AppProps) {
   return (
     <main>
       <MainLayout
@@ -25,15 +33,7 @@ export default function App({ data }: { data: ArticleProps[] }) {
             </div>
 
             <div className="row">
-              <TagList
-                tags={[
-                  { children: 'Platos principales', href: '#' },
-                  { children: 'Cerdo', href: '#' },
-                  { children: 'Papa', href: '#' },
-                  { children: 'Date un gustito', href: '#' },
-                  { children: 'La familia', href: '#' },
-                ]}
-              />
+              <TagList tags={data.tags} />
             </div>
           </>
         }
@@ -44,7 +44,7 @@ export default function App({ data }: { data: ArticleProps[] }) {
         }
       >
         <>
-          <ArticleGrid articles={data} />
+          <ArticleGrid articles={data.articles} />
         </>
       </MainLayout>
     </main>
