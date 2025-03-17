@@ -1,0 +1,28 @@
+{
+  "name": "@org/backendff",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "targets": {
+      "serve": {
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "@org/backendff:build",
+          "runBuildTargetDependencies": false
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "@org/backendff:build:development"
+          },
+          "production": {
+            "buildTarget": "@org/backendff:build:production"
+          }
+        }
+      }
+    }
+  }
+}
