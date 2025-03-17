@@ -5,7 +5,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["npm run build:client", "npm run build:server"],
+        "commands": ["NODE_ENV=production npm run build:client", "NODE_ENV=production npm run build:server"],
         "cwd": "apps/frontend"
       }
     },
@@ -19,7 +19,7 @@
     "dev": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nodemon --watch src --ext ts,tsx --exec \"npm run build && npm run start\"",
+        "command": "nodemon --watch src --ext ts,tsx --exec \"webpack --config webpack.client.config.js && webpack --config webpack.server.config.js && npm run start\"",
         "cwd": "apps/frontend"
       }
     },

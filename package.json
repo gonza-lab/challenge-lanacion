@@ -6,6 +6,7 @@
     "build:frontend": "nx build frontend",
     "start:frontend": "nx serve frontend",
     "dev:frontend": "nx run frontend:dev",
+    "dev:backendff": "nx serve backendff",
     "lint:frontend": "nx lint frontend",
     "lint:backendff": "nx lint backendff",
     "prepare": "husky"
