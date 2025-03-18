@@ -1,7 +1,7 @@
 const DotenvWebpackPlugin = require('dotenv-webpack')
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: './src/server/index.tsx',
@@ -27,11 +27,15 @@ module.exports = {
         exclude: /node_modules/,
         use: 'babel-loader',
       },
+      {
+        test: /\.css$/,
+        use: 'ignore-loader', // ⬅ Si da error, prueba con ignore-loader
+      },
     ],
   },
   // Inicialmente voy a usar variables de entorno solo en servidor, por esa razón solo agrego el plugin en servidor.
   plugins: [
-		new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new DotenvWebpackPlugin({
       safe: './env.example',
     }),

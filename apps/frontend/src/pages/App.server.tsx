@@ -16,11 +16,9 @@ interface AppProps {
   }
 }
 
-export async function getData() {
+export async function getData({ page = 1, limit = 10 }) {
   const [resArticles, resTags] = await Promise.all([
-    fetch(
-      `${CONFIG.BACKENDFF_URL}/articles?${qs.stringify({ page: 1, limit: 30 })}`
-    ),
+    fetch(`${CONFIG.BACKENDFF_URL}/articles?${qs.stringify({ page, limit })}`),
     fetch(`${CONFIG.BACKENDFF_URL}/tags`),
   ])
 

@@ -22,7 +22,7 @@ export async function renderSSR(
           <head>
             <meta charset="UTF-8">
             <title>React Server Components</title>
-            <link rel="stylesheet" href="/styles.css">
+            <link rel="stylesheet" href="/main.css">
           </head>
           <body>
             <div id="root">`)

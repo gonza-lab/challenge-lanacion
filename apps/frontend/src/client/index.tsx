@@ -2,9 +2,10 @@ import React from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import App from '@/pages/App.server'
 import About from '@/pages/About.server'
+import './global.css'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const routes: Record<string, React.FC<{data: any}>> = {
+const routes: Record<string, React.FC<{ data: any }>> = {
   '/': App,
   '/about': About,
 }

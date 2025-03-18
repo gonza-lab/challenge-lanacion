@@ -23,10 +23,8 @@ export const getArticles = async (_req: Request, res: Response) => {
     const startIndex = (pageNumber - 1) * limitNumber
     const endIndex = startIndex + limitNumber
 
-    const paginatedArticles = filterBySubtype(
-      articlesData.articles.slice(startIndex, endIndex),
-      '7'
-    )
+    const articles = filterBySubtype(articlesData.articles, '7')
+    const paginatedArticles = articles.slice(startIndex, endIndex)
 
     res.json({
       page: pageNumber,

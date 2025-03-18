@@ -19,7 +19,7 @@
     "dev": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nodemon --watch src --ext ts,tsx --exec \"webpack --config webpack.client.config.js && webpack --config webpack.server.config.js && npm run start\"",
+        "command": "nodemon --watch src --ext ts,tsx,css --exec \"webpack --config webpack.client.config.js && webpack --config webpack.server.config.js && npm run start\"",
         "cwd": "apps/frontend"
       }
     },
