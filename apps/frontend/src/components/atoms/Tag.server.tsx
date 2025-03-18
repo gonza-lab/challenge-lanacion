@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import Link from './Link.server'
+import Link from '@/components/atoms/Link.server'
 
 export interface TagProps {
   children: ReactNode | string

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import Typography from '../atoms/Typography.server'
+import Typography from '@/components/atoms/Typography.server'
 
 export interface ArticleProps {
   title: string | ReactNode

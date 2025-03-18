@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import ArticleGrid from './ArticleGrid.server'
-import { ArticleProps } from '../molecules/Article.server'
+import { ArticleProps } from '@/components/molecules/Article.server'
 
 describe('ArticleGrid component tests', () => {
   test('grid is rendered correctly', () => {

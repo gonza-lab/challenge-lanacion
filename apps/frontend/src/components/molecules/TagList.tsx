@@ -1,5 +1,5 @@
 import React from 'react'
-import Tag, { TagProps } from '../atoms/Tag.server'
+import Tag, { TagProps } from '@/components/atoms/Tag.server'
 
 interface TagListProps {
   tags: TagProps[]

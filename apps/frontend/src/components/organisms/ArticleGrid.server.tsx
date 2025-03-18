@@ -1,5 +1,5 @@
 import React from 'react'
-import Article, { ArticleProps } from '../molecules/Article.server'
+import Article, { ArticleProps } from '@/components/molecules/Article.server'
 
 export default function ArticleGrid({
   articles,
