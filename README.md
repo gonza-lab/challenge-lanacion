@@ -1,6 +1,42 @@
 # Challenge La Nación
 
-# Pasos para Añadir una Nueva Ruta en SSR
+## **Características Técnicas del Proyecto**
+
+### **Frontend**
+#### **Tecnologías Principales**
+- React con Server Components (RSC)
+- Webpack + Babel para bundling y transformación de código
+- ESLint + Prettier para linting y formateo de código
+- Jest + React Testing Library para pruebas unitarias
+- Arquitectura basada en **Atomic Design**:
+  - `atoms/`: Componentes básicos reutilizables (botones, inputs)
+  - `molecules/`: Combinación de átomos (formularios, cards)
+  - `organisms/`: Secciones completas de UI (grids, navegaciones)
+  - `pages/`: Estructura de cada página
+
+#### **Características Claves**
+- Renderizado híbrido combinando Client Components y Server Components
+- Optimización para SEO mediante pre-renderizado en el servidor
+- Modular y escalable con NX Monorepo
+- Integración con el BFF para consumo de datos
+
+---
+
+### **Backend for Frontend (BFF)**
+#### **Tecnologías Principales**
+- Node.js con Express
+- TypeScript para tipado fuerte
+- Jest + Supertest para pruebas unitarias e integración
+- NX Monorepo para gestión eficiente del código
+
+#### **Características Claves**
+- Filtrado de artículos obtenidos de una API externa (`subtype: "7"`)
+- Agrupación y totalización de tags, ordenados de mayor a menor
+- Reformateo de datos para optimizar la respuesta al frontend
+
+---
+
+## Pasos para Añadir una Nueva Ruta en SSR
 
 Para agregar una nueva página en la aplicación SSR, debes hacer cambios en los siguientes archivos:
 
