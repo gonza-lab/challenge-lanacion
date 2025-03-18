@@ -6,12 +6,15 @@ import About from '@/pages/About.server'
 export function setupRoutes(app: Express) {
   app.get('/', async (req, res) => {
     const { page, limit } = req.query
+
+    if (!limit || !page) {
+      return res.redirect(302, '/?limit=30&page=1')
+    }
+
     await renderSSR(req, res, App, () =>
       getData({
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-        page: isNaN(page as any) ? undefined : Number(page),
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-        limit: isNaN(limit as any) ? undefined : Number(limit),
+        page: Number(page),
+        limit: Number(limit),
       })
     )
   })

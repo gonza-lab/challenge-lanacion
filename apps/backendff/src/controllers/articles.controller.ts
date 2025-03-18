@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import articlesData from '@/data/articles.json'
-import { format } from 'date-fns/format'
+import { filterBySubtype, paginateArticles } from '@/utils/articles.util'
+import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
-import { filterBySubtype } from '@/utils/articles.util'
 
 // Con paginación mejoramos la optmización del endpoint ya que no estamos devolviendo todos los datos de una.
 
@@ -10,30 +10,19 @@ import { filterBySubtype } from '@/utils/articles.util'
 // sin tener que hacerlo a mano
 export const getArticles = async (_req: Request, res: Response) => {
   try {
-    const { page = '1', limit = '10' } = _req.query
+    const articles = filterBySubtype(articlesData.articles, '7')
+    const result = paginateArticles(articles, _req.query)
 
-    const pageNumber = parseInt(page as string, 10)
-    const limitNumber = parseInt(limit as string, 10)
-
-    if (pageNumber < 1 || limitNumber < 1) {
-      res.status(400).json({ error: 'Page and limit must be greater than 0' })
+    if ('error' in result) {
+      res.status(400).json(result)
       return
     }
 
-    const startIndex = (pageNumber - 1) * limitNumber
-    const endIndex = startIndex + limitNumber
-
-    const articles = filterBySubtype(articlesData.articles, '7')
-    const paginatedArticles = articles.slice(startIndex, endIndex)
-
     res.json({
-      page: pageNumber,
-      limit: limitNumber,
-      totalArticles: articlesData.articles.length,
-      totalPages: Math.ceil(articlesData.articles.length / limitNumber),
-      articles: paginatedArticles.map((article) => ({
+      ...result,
+      articles: result.articles.map((article) => ({
         title: article.headlines.basic,
-        image: article.promo_items?.basic.url,
+        image: article.promo_items?.basic?.url,
         date: format(article.display_date, "d 'de' MMMM 'de' yyyy", {
           locale: es,
         }),
