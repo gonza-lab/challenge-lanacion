@@ -13,6 +13,10 @@
     "backendff:build": "nx build backendff",
     "backendff:start": "node apps/backendff/dist/main.js",
     "backendff:dev": "nx serve backendff",
+		"docker:up": "docker compose up --build -d",
+	  "docker:down": "docker compose down",
+  	"docker:logs": "docker compose logs -f",
+  	"docker:restart": "docker compose restart",
     "lint": "npm run frontend:lint && npm run backendff:lint",
 		"test": "npm run frontend:test && npm run backendff:test",
     "prepare": "husky"

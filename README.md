@@ -1,7 +1,20 @@
-# Challenge La Nación
 
+# Challenge La Nación
+## Contenido
 - [Challenge La Nación](#challenge-la-nación)
+	- [Contenido](#contenido)
 	- [Descripción](#descripción)
+	- [Decisiones técnicas](#decisiones-técnicas)
+		- [Monorepo o repositorios independientes?](#monorepo-o-repositorios-independientes)
+		- [Por qué implemento rutas?](#por-qué-implemento-rutas)
+		- [Por qué implemento paginación?](#por-qué-implemento-paginación)
+		- [Por qué tengo dos archivos de configuración Webpack en el frontend?](#por-qué-tengo-dos-archivos-de-configuración-webpack-en-el-frontend)
+		- [Por qué un Backend for Frontend (BFF)?](#por-qué-un-backend-for-frontend-bff)
+		- [Por qué añadí un script que valida la configuración del archivo `.env`?](#por-qué-añadí-un-script-que-valida-la-configuración-del-archivo-env)
+		- [Por qué uso alias?](#por-qué-uso-alias)
+		- [Por qué uso Husky?](#por-qué-uso-husky)
+		- [Por qué uso un componente LazyImage para las imágenes?](#por-qué-uso-un-componente-lazyimage-para-las-imágenes)
+		- [Por qué uso Design?](#por-qué-uso-design)
 	- [Características Técnicas del Proyecto](#características-técnicas-del-proyecto)
 		- [Frontend](#frontend)
 			- [Tecnologías Principales](#tecnologías-principales)
@@ -15,6 +28,7 @@
 		- [2. Instalar dependencias](#2-instalar-dependencias)
 	- [Scripts Disponibles](#scripts-disponibles)
 		- [Desarrollo](#desarrollo)
+		- [Docker](#docker)
 	- [Configuración de Variables de Entorno](#configuración-de-variables-de-entorno)
 		- [Frontend](#frontend-1)
 	- [Pruebas](#pruebas)
@@ -26,6 +40,42 @@
 
 ## Descripción
 Este proyecto es una aplicación construida con un monorepo gestionado por Nx. Contiene un frontend basado en React aplicando técnicas de SSR y un Backend for Frontend (BFF) desarrollado con Express.
+
+## Decisiones técnicas
+
+### Monorepo o repositorios independientes?
+Elegí un monorepo porque considero que es un proyecto pequeño y el backend está construido exclusivamente para el frontend. Esto permite una gestión más sencilla al tener todo el código en un solo lugar.
+
+### Por qué implemento rutas?
+Para que la aplicación sea escalable y pueda adaptarse a futuras necesidades sin grandes modificaciones. [Más info acá](#pasos-para-añadir-una-nueva-ruta-en-ssr)
+
+### Por qué implemento paginación?
+La paginación permite devolver respuestas más cortas y mejorar el rendimiento de la aplicación, reduciendo la carga en el servidor y optimizando la experiencia del usuario.
+
+### Por qué tengo dos archivos de configuración Webpack en el frontend?
+Porque estoy aplicando Server-Side Rendering (SSR). Prerenderizo la aplicación en el servidor con `renderToPipeableStream` y luego la hidrato en el cliente con `hydrateRoot`. Por esta razón, genero dos bundles:
+
+- **Server bundle**: Se envía al cliente cuando se accede a la web.
+- **Client bundle**: Se carga en el navegador y se encarga de hidratar la aplicación.
+
+### Por qué un Backend for Frontend (BFF)?
+El BFF se encarga de preparar los datos para que el frontend los consuma, separando esta responsabilidad de la lógica y la estructura del frontend. Esto facilita el mantenimiento y la escalabilidad del proyecto.
+
+### Por qué añadí un script que valida la configuración del archivo `.env`?
+Es común que al clonar un proyecto se intente levantar sin tener las variables de entorno correctamente configuradas. Este script previene ese problema asegurándose de que todas las variables requeridas estén definidas antes de ejecutar la aplicación.
+
+### Por qué uso alias?
+- Simplifican las importaciones en proyectos grandes, evitando rutas largas y complejas.
+- Facilitan la reorganización del código, permitiendo mover archivos sin romper referencias.
+
+### Por qué uso Husky?
+Husky permite ejecutar scripts antes de realizar un commit. Un problema frecuente es modificar algo en desarrollo y enviarlo con tests fallidos o errores de lint. Husky previene esto ejecutando pruebas y chequeos antes de permitir un commit.
+
+### Por qué uso un componente LazyImage para las imágenes?
+Dado que la lista contiene muchas imágenes, no es eficiente cargarlas todas de inmediato. Utilizo `IntersectionObserver` para cargar solo las imágenes visibles en el viewport del usuario, mejorando el rendimiento. Una optimización adicional es cargar inmediatamente las imágenes que ya están en el viewport inicial, sin esperar al `useEffect`.
+
+### Por qué uso Design?
+Atomic Design es una metodología efectiva para proyectos pequeños. En este caso, el proyecto no tiene una lógica de negocio compleja, por lo que una arquitectura basada en features no aportaría grandes beneficios en esta etapa.
 
 ## Características Técnicas del Proyecto
 
@@ -95,6 +145,12 @@ Este proyecto es una aplicación construida con un monorepo gestionado por Nx. C
 - **Tests y Lint**
 	- `npm run test`: Ejecuta los tests de todos los proyectos.
   - `npm run lint`: Ejecuta ESLint en todo el proyecto.
+
+### Docker
+- `npm run docker:up` → Levanta los servicios con Docker Compose.
+- `npm run docker:down` → Detiene y elimina los contenedores.
+- `npm run docker:logs` → Muestra logs en tiempo real.
+- `npm run docker:restart` → Reinicia los contenedores.
 
 ## Configuración de Variables de Entorno 
 ### Frontend
