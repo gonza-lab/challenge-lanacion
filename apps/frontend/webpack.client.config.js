@@ -7,7 +7,6 @@ const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const glob = require('glob-all')
-const webpack = require('webpack')
 
 module.exports = {
   entry: './src/client/index.tsx',
@@ -26,9 +25,7 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin(),
-    ],
+    minimizer: [new CssMinimizerPlugin()],
   },
   module: {
     rules: [

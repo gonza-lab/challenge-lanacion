@@ -28,13 +28,13 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: 'ignore-loader', 
+        use: 'ignore-loader',
       },
     ],
   },
   // Inicialmente voy a usar variables de entorno solo en servidor, por esa razón solo agrego el plugin en servidor.
-  plugins: [
-    new CleanWebpackPlugin(),
-    new DotenvWebpackPlugin(),
-  ],
+  plugins: [new CleanWebpackPlugin(), new DotenvWebpackPlugin()],
+  externals: {
+    express: 'express',
+  },
 }
