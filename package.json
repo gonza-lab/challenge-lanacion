@@ -9,7 +9,7 @@
     "backendff:dev": "nx serve backendff",
     "frontend:lint": "nx lint frontend",
     "backendff:lint": "nx lint backendff",
-		"lint": "npm run frontend:lint && npm run backendff:lint",
+    "lint": "npm run frontend:lint && npm run backendff:lint",
     "prepare": "husky"
   },
   "private": true,
@@ -57,6 +57,7 @@
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
     "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^9.1.2",
     "dotenv-webpack": "^8.1.0",
     "eslint": "^9.22.0",
