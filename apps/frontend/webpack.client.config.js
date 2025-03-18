@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const glob = require('glob-all')
 
 module.exports = {
@@ -42,6 +43,7 @@ module.exports = {
     ],
   },
   plugins: [
+    ...(process.env.ANALYZE === 'true' ? [new BundleAnalyzerPlugin()] : []),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -66,6 +68,6 @@ module.exports = {
         greedy: [/^lay/, /lay$/], // Mantiene atributos CSS como `[class^="lay"]`
       },
     }),
-		new CssMinimizerPlugin(), // Minifica el CSS final
+    new CssMinimizerPlugin(), // Minifica el CSS final
   ],
 }

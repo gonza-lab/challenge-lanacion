@@ -2,8 +2,10 @@ import express from 'express'
 import path from 'path'
 import { setupRoutes } from '@/server/routes'
 import { CONFIG } from '@/config/env'
+import compression from 'compression'
 
 const app = express()
+app.use(compression())
 
 // Configurar las rutas
 setupRoutes(app)
