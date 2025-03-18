@@ -1,5 +1,5 @@
 import request from 'supertest'
-import app from '../app'
+import app from '@/app'
 
 jest.mock('../data/articles.json', () => ({
   articles: Array.from({ length: 50 }, (_, i) => ({

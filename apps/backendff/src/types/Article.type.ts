@@ -1,4 +1,4 @@
-import { Tag } from './Tag.type'
+import { Tag } from '@/types/Tag.type'
 
 // generated with https://app.quicktype.io/
 export interface Article {

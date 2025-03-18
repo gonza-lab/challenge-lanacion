@@ -1,5 +1,5 @@
 import { filterBySubtype } from './articles.util'
-import data from '../data/articles.json'
+import data from '@/data/articles.json'
 const articles = data.articles
 
 describe('filterBySubtype util', () => {

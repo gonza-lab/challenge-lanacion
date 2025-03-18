@@ -1,4 +1,4 @@
-import { Article } from '../types/Article.type'
+import { Article } from '@/types/Article.type'
 
 export const filterBySubtype = (articles: Article[], subtype: string) => {
   return articles.filter(

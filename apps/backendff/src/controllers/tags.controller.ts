@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import articlesData from '../data/articles.json'
-import { getTopTags as getTopTagsUtil } from '../utils/tag.util'
+import articlesData from '@/data/articles.json'
+import { getTopTags as getTopTagsUtil } from '@/utils/tag.util'
 
 export const getTopTags = async (_req: Request, res: Response) => {
   try {

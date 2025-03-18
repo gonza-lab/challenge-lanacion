@@ -1,5 +1,5 @@
-import { Article } from '../types/Article.type'
-import { getTopTags } from './tag.util'
+import { Article } from '@/types/Article.type'
+import { getTopTags } from '@/utils/tag.util'
 
 // Mock de artículos con tags repetidos para probar el conteo
 const mockArticles: Article[] = [

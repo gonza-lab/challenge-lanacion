@@ -9,7 +9,10 @@
     "rootDir": "src",
     "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+		"paths": {
+      "@/*": ["./src/*"],
+		}
   },
   "include": [
     "src/**/*.ts",

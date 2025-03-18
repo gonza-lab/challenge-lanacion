@@ -1,5 +1,5 @@
-import { Article } from '../types/Article.type'
-import { Tag } from '../types/Tag.type'
+import { Article } from '@/types/Article.type'
+import { Tag } from '@/types/Tag.type'
 
 export function getTopTags(articles: Article[], limit = 10): Tag[] {
   const tagCounts: Record<string, { count: number; tag: Tag }> = {}

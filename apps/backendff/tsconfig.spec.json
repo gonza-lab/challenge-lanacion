@@ -5,7 +5,10 @@
     "module": "commonjs",
     "moduleResolution": "node10","types": ["jest", "node"],
     "resolveJsonModule": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"paths": {
+      "@/*": ["./src/*"],
+		}
   },
   "include": [
     "jest.config.ts",

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
-import articlesData from '../data/articles.json'
+import articlesData from '@/data/articles.json'
 import { format } from 'date-fns/format'
 import { es } from 'date-fns/locale'
-import { filterBySubtype } from '../utils/articles.util'
+import { filterBySubtype } from '@/utils/articles.util'
 
 // Con paginación mejoramos la optmización del endpoint ya que no estamos devolviendo todos los datos de una.
 

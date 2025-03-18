@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { getArticles } from '../controllers/articles.controller';
-import { getTopTags } from '../controllers/tags.controller';
+import { getArticles } from '@/controllers/articles.controller';
+import { getTopTags } from '@/controllers/tags.controller';
 
 const router = Router();
 router.get('/articles', getArticles);
