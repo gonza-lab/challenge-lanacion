@@ -7,6 +7,7 @@ const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const glob = require('glob-all')
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/client/index.tsx',
@@ -48,9 +49,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-    new DotenvWebpackPlugin({
-      safe: './env.example',
-    }),
+    new DotenvWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new PurgeCSSPlugin({
       paths: glob.sync([

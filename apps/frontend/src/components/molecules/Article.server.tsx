@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import Typography from '@/components/atoms/Typography.server'
+import LazyImage from '../atoms/LazyImage.client'
 
 export interface ArticleProps {
   title: string | ReactNode
@@ -13,7 +14,7 @@ export default function Article({ title, image, date }: ArticleProps) {
       <section id="" className="cont-figure">
         <a href="" className="figure">
           <picture id="" className="content-pic picture">
-            <img src={image} alt="" className="content-img" />
+            <LazyImage src={image} alt="" className="content-img" />
           </picture>
         </a>
       </section>
@@ -21,7 +22,9 @@ export default function Article({ title, image, date }: ArticleProps) {
         <Typography variant="articleTitle" as="h2">
           <a href="">{title}</a>
         </Typography>
-				<Typography variant='date' as='h4'>{date}</Typography>
+        <Typography variant="date" as="h4">
+          {date}
+        </Typography>
       </div>
     </article>
   )

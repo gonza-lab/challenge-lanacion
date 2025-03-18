@@ -3,7 +3,8 @@
 # Perfeccionamiento
 - [ ] webpack está bien configurado?
 - [ ] Estoy utilizando nx correctamente?
-- [ ]  quitar eslint-disable-next-line
+- [ ] quitar eslint-disable-next-line
+- [ ] manejar subtype por url
 
 ## Todo list
 - [x] Crear un componente typography que me permita renderizar contenido

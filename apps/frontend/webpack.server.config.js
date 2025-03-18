@@ -36,8 +36,6 @@ module.exports = {
   // Inicialmente voy a usar variables de entorno solo en servidor, por esa razón solo agrego el plugin en servidor.
   plugins: [
     new CleanWebpackPlugin(),
-    new DotenvWebpackPlugin({
-      safe: './env.example',
-    }),
+    new DotenvWebpackPlugin(),
   ],
 }

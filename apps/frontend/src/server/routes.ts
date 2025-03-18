@@ -1,7 +1,8 @@
 import { Express } from 'express'
 import { renderSSR } from './ssr'
-import App, { getData } from '@/pages/App.server'
-import About from '@/pages/About.server'
+import App from '@/pages/app'
+import About from '@/pages/about'
+import { getData } from '@/pages/app/data'
 
 export function setupRoutes(app: Express) {
   app.get('/', async (req, res) => {

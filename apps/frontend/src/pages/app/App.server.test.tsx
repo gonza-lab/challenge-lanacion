@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import App from './App.server'
+import App from './'
 
 describe('App Page tests', () => {
   test('renderiza la página App correctamente', () => {

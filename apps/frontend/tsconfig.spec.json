@@ -5,6 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node10",
     "types": ["jest", "node"],
+		"lib": ["dom"],
     "paths": {
       "@/*": ["./src/*"]
     }
