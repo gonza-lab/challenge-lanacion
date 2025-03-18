@@ -1,15 +1,20 @@
 {
-  "name": "@org/source",
+  "name": "challenge-lanacion",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "frontend:lint": "nx lint frontend",
+    "frontend:test": "nx test frontend",
     "frontend:build": "nx build frontend",
     "frontend:start": "nx serve frontend",
     "frontend:dev": "nx run frontend:dev",
-    "backendff:dev": "nx serve backendff",
-    "frontend:lint": "nx lint frontend",
     "backendff:lint": "nx lint backendff",
+    "backendff:test": "nx test backendff",
+    "backendff:build": "nx build backendff",
+    "backendff:start": "node apps/backendff/dist/main.js",
+    "backendff:dev": "nx serve backendff",
     "lint": "npm run frontend:lint && npm run backendff:lint",
+		"test": "npm run frontend:test && npm run backendff:test",
     "prepare": "husky"
   },
   "private": true,
