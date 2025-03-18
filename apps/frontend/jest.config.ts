@@ -2,7 +2,7 @@ export default {
   displayName: 'frontend',
   preset: '../../jest.preset.js',
   coverageDirectory: 'test-output/jest/coverage',
-	testMatch: ['**/*.test.tsx', '**/*.test.ts'], // Asegura que Jest busque archivos .test.tsx
+	testMatch: ['**/*.test.tsx', '**/*.test.ts'],
 	setupFilesAfterEnv: ['./jest.setup.ts'],
   testEnvironment: 'jsdom',
   transform: {

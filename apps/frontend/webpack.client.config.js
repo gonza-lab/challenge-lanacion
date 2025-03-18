@@ -27,7 +27,7 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [
-      new CssMinimizerPlugin(), // Minifica el CSS
+      new CssMinimizerPlugin(),
     ],
   },
   module: {
@@ -59,14 +59,7 @@ module.exports = {
         path.join(__dirname, 'src/**/*.tsx'),
         path.join(__dirname, 'public/index.html'),
       ]),
-      safelist: {
-        standard: [
-          'lay', // Evita eliminar clases que comiencen con "lay"
-        ],
-        deep: [/^lay/, /lay$/], // Asegura que detecte clases con este patrón
-        greedy: [/^lay/, /lay$/], // Mantiene atributos CSS como `[class^="lay"]`
-      },
     }),
-    new CssMinimizerPlugin(), // Minifica el CSS final
+    new CssMinimizerPlugin(),
   ],
 }

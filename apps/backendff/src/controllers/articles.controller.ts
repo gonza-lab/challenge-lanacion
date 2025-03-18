@@ -28,8 +28,8 @@ export const getArticles = async (_req: Request, res: Response) => {
         }),
       })),
     })
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
+  } catch (error: unknown) {
+    console.error('Error fetching articles: ', error)
     res.status(500).json({ error: 'Failed to fetch articles' })
   }
 }

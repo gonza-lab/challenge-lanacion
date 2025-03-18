@@ -41,7 +41,6 @@ export default defineConfig([
       },
     },
     rules: {
-      // Reglas recomendadas
       ...js.configs.recommended.rules,
       ...ts.configs.recommended.rules,
       ...react.configs.recommended.rules,

@@ -1,7 +1,7 @@
+/*global HTMLAnchorElement*/
 import React, { AnchorHTMLAttributes } from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type LinkProps = AnchorHTMLAttributes<{}>
+type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement>
 
 export default function Link({ className, children, ...props }: LinkProps) {
   return (

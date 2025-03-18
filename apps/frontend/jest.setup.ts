@@ -21,5 +21,4 @@ class MockIntersectionObserver implements IntersectionObserver {
   unobserve(): void {}
 }
 
-// Definir IntersectionObserver globalmente para Jest
 (global as any).IntersectionObserver = MockIntersectionObserver;

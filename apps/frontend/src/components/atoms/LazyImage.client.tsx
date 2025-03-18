@@ -1,3 +1,4 @@
+/*global IntersectionObserver*/
 import React, { useEffect, useState, useRef } from 'react'
 
 interface LazyImageProps {
@@ -11,15 +12,14 @@ export default function LazyImage({ src, alt, className }: LazyImageProps) {
   const imgRef = useRef(null)
 
   useEffect(() => {
-		// eslint-disable-next-line no-undef
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
-          observer.disconnect() // Deja de observar después de cargar
+          observer.disconnect() 
         }
       },
-      { threshold: 0.1 } // Se activa cuando el 10% de la imagen es visible
+      { threshold: 0.1 }
     )
 
     if (imgRef.current) {

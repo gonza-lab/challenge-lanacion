@@ -5,10 +5,8 @@ import { renderToPipeableStream } from 'react-dom/server'
 export async function renderSSR(
   req: Request,
   res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Component: React.FC<{ data: any }>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getData?: () => Promise<any>
+  Component: React.FC<{ data: unknown }>,
+  getData?: () => Promise<unknown>
 ) {
   res.setHeader('Content-Type', 'text/html')
 
