@@ -14,8 +14,9 @@ FROM node:20 AS runner
 
 WORKDIR /app
 
-COPY --from=builder /app/apps/frontend/dist ./
+COPY --from=builder /app/apps/frontend/dist ./dist
+COPY --from=builder /app/apps/frontend/public ./public
 
 EXPOSE 3000
 
-CMD ["node", "server/server.bundle.js"]
+CMD ["node", "dist/server/server.bundle.js"]
