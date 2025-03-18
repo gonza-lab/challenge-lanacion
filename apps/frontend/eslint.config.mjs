@@ -26,6 +26,7 @@ export default defineConfig([
         jest: 'readonly',
         test: 'readonly',
         expect: 'readonly',
+				describe: 'readonly'
       },
     },
     plugins: {

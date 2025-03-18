@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build:frontend": "nx build frontend",
-    "start:frontend": "nx serve frontend",
-    "dev:frontend": "nx run frontend:dev",
-    "dev:backendff": "nx serve backendff",
-    "lint:frontend": "nx lint frontend",
-    "lint:backendff": "nx lint backendff",
+    "frontend:build": "nx build frontend",
+    "frontend:start": "nx serve frontend",
+    "frontend:dev": "nx run frontend:dev",
+    "backendff:dev": "nx serve backendff",
+    "frontend:lint": "nx lint frontend",
+    "backendff:lint": "nx lint backendff",
     "prepare": "husky"
   },
   "private": true,
@@ -21,7 +21,8 @@
     "express": "^4.21.2",
     "qs": "^6.14.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "supertest": "^7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -50,6 +51,7 @@
     "@types/node": "~18.16.9",
     "@types/react": "^19.0.11",
     "@types/react-dom": "^19.0.4",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
     "babel-loader": "^9.1.2",

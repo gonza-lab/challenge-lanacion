@@ -10,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist/server'),
     libraryTarget: 'commonjs2'
   },
+	// excluimos los módulos de node_modules
   externals: [nodeExternals()],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']

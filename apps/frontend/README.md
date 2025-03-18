@@ -4,10 +4,10 @@
 - [x] Crear un componente typography que me permita renderizar contenido
 - [x] Configurar eslint
 - [x] Desarrollar back en carpeta separada
-- [ ] Implementar redux
+- [x] Implementar unit testing: frontend
+- [ ] Agregar fuente
+- [ ] Implementar unit testing: backend
 - [ ] Agregar documentacion
-- [ ] Implementar unit testing
-- [ ] Desplegar en plataforma paas	
-- [ ] Ver de instalar una libreria que optimice imagenes en produccion
 - [ ] Agregar dockerfile
-- [ ] agregar fuente
+- [ ] Desplegar en plataforma paas	
+- [ ] Optimizar performance en producción

@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import articlesData from '../data/articles.json'
 import { format } from 'date-fns/format'
 import { es } from 'date-fns/locale'
+import { filterBySubtype } from '../utils/articles.util'
 
 // Con paginación mejoramos la optmización del endpoint ya que no estamos devolviendo todos los datos de una.
 
@@ -22,23 +23,23 @@ export const getArticles = async (_req: Request, res: Response) => {
     const startIndex = (pageNumber - 1) * limitNumber
     const endIndex = startIndex + limitNumber
 
-    const paginatedArticles = articlesData.articles
-      .slice(startIndex, endIndex)
-      .filter((article: { subtype: string }) => article.subtype === '7')
-      .map((article) => ({
-        title: article.headlines.basic,
-        image: article.promo_items?.basic.url,
-        date: format(article.display_date, "d 'de' MMMM 'de' yyyy", {
-          locale: es,
-        }),
-      }))
+    const paginatedArticles = filterBySubtype(
+      articlesData.articles.slice(startIndex, endIndex),
+      '7'
+    )
 
     res.json({
       page: pageNumber,
       limit: limitNumber,
       totalArticles: articlesData.articles.length,
       totalPages: Math.ceil(articlesData.articles.length / limitNumber),
-      articles: paginatedArticles,
+      articles: paginatedArticles.map((article) => ({
+        title: article.headlines.basic,
+        image: article.promo_items?.basic.url,
+        date: format(article.display_date, "d 'de' MMMM 'de' yyyy", {
+          locale: es,
+        }),
+      })),
     })
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {

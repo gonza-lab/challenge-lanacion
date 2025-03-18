@@ -3,17 +3,19 @@ import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Button from './Button.client'
 
-test('renderiza el botón correctamente', () => {
-  render(<Button onClick={() => {}}>Click Me</Button>)
+describe('Button component tests', () => {
+  test('button should rendered correctly', () => {
+    render(<Button onClick={() => {}}>Click Me</Button>)
 
-  const button = screen.getByText('Click Me')
-  expect(button).toBeInTheDocument()
-})
+    const button = screen.getByText('Click Me')
+    expect(button).toBeInTheDocument()
+  })
 
-test('ejecuta la función onClick cuando se presiona', () => {
-  const handleClick = jest.fn()
-  render(<Button onClick={handleClick}>Click Me</Button>)
+  test('when button is pressed, onClick function is executed', () => {
+    const handleClick = jest.fn()
+    render(<Button onClick={handleClick}>Click Me</Button>)
 
-  fireEvent.click(screen.getByText('Click Me'))
-  expect(handleClick).toHaveBeenCalledTimes(1)
+    fireEvent.click(screen.getByText('Click Me'))
+    expect(handleClick).toHaveBeenCalledTimes(1)
+  })
 })
