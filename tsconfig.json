@@ -4,9 +4,6 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/backendff-e2e"
-    },
-    {
       "path": "./apps/backendff"
     }
   ]
