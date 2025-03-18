@@ -1,5 +1,9 @@
 # ChallengeDevArchitectureFrontend
 
+# Perfeccionamiento
+- [ ] webpack está bien configurado?
+- [ ] Estoy utilizando nx correctamente?
+
 ## Todo list
 - [x] Crear un componente typography que me permita renderizar contenido
 - [x] Configurar eslint

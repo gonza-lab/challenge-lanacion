@@ -1,18 +1,18 @@
-import express from 'express';
-import path from 'path';
-import { setupRoutes } from './routes'; 
-import { config } from './config';
+import express from 'express'
+import path from 'path'
+import { setupRoutes } from '@/server/routes'
+import { CONFIG } from '@/config/env'
 
-const app = express();
+const app = express()
 
 // Configurar las rutas
-setupRoutes(app);
+setupRoutes(app)
 
 // Servir los archivos estáticos generados por el bundle del cliente
 app.use(express.static(path.join(__dirname, '../../dist/client')))
 app.use(express.static(path.join(__dirname, '../../public')))
 
 // Iniciar el servidor
-app.listen(config.PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${config.PORT}`);
-});
+app.listen(CONFIG.PORT, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${CONFIG.PORT}`)
+})

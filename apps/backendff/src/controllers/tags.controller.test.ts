@@ -1,5 +1,6 @@
 import request from 'supertest'
 import app from '../app'
+import { ReactNode } from 'react'
 
 jest.mock('../utils/articles.util.ts', () => ({
   getTopTags: jest.fn((articles) => articles),
@@ -11,13 +12,15 @@ describe('GET /api/tags', () => {
 
     expect(response.status).toBe(200)
 
-    response.body.tags.forEach((tag: any) => {
-      expect(tag).toHaveProperty('href')
-      expect(tag).toHaveProperty('children')
-      expect(Object.keys(tag).length).toBe(2)
+    response.body.tags.forEach(
+      (tag: Partial<{ href: string; children: ReactNode }>) => {
+        expect(tag).toHaveProperty('href')
+        expect(tag).toHaveProperty('children')
+        expect(Object.keys(tag).length).toBe(2)
 
-      expect(tag.href).toBeTruthy()
-      expect(tag.children).toBeTruthy()
-    })
+        expect(tag.href).toBeTruthy()
+        expect(tag.children).toBeTruthy()
+      }
+    )
   })
 })

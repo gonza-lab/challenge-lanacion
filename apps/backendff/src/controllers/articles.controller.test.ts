@@ -31,15 +31,17 @@ describe('GET /api/articles', () => {
     expect(response.status).toBe(200)
     expect(response.body.articles.length).toBe(limit)
 
-    response.body.articles.forEach((article: any) => {
-      expect(article).toHaveProperty('title')
-      expect(article).toHaveProperty('image')
-      expect(article).toHaveProperty('date')
-      expect(Object.keys(article).length).toBe(3)
+    response.body.articles.forEach(
+      (article: Partial<{ title: string; image: string; date: string }>) => {
+        expect(article).toHaveProperty('title')
+        expect(article).toHaveProperty('image')
+        expect(article).toHaveProperty('date')
+        expect(Object.keys(article).length).toBe(3)
 
-      expect(article.title).toBeTruthy()
-      expect(article.image).toBeTruthy()
-      expect(article.date).toBeTruthy()
-    })
+        expect(article.title).toBeTruthy()
+        expect(article.image).toBeTruthy()
+        expect(article.date).toBeTruthy()
+      }
+    )
   })
 })

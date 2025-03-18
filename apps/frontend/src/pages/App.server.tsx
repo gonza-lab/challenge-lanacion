@@ -6,11 +6,38 @@ import TagList from '../components/molecules/TagList'
 import Button from '../components/atoms/Button.client'
 import { ArticleProps } from '../components/molecules/Article.server'
 import { TagProps } from '../components/atoms/Tag.server'
+import { CONFIG } from '@/config/env'
+import qs from 'qs'
 
 interface AppProps {
   data: {
     articles: ArticleProps[]
     tags: TagProps[]
+  }
+}
+
+export async function getData() {
+  const [resArticles, resTags] = await Promise.all([
+    fetch(
+      `${CONFIG.BACKENDFF_URL}/articles?${qs.stringify({ page: 1, limit: 30 })}`
+    ),
+    fetch(`${CONFIG.BACKENDFF_URL}/tags`),
+  ])
+
+  if (!resArticles.ok || !resTags.ok) {
+    throw new Error(
+      `Failed to fetch: Articles(${resArticles.status}), Tags(${resTags.status})`
+    )
+  }
+
+  const [articlesData, tagsData] = await Promise.all([
+    resArticles.json(),
+    resTags.json(),
+  ])
+
+  return {
+    articles: articlesData.articles,
+    tags: tagsData.tags,
   }
 }
 
